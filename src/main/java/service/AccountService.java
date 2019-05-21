@@ -5,7 +5,7 @@ import repo.AccountRepo;
 
 public class AccountService {
 	
-	private AccountRepo repo = new AccountRepo();
+	private AccountRepo repo = AccountRepo.getInstance();
 	private int count;
 	
 	public Account addAccount(Account account) {
