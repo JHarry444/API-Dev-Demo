@@ -4,6 +4,7 @@ import javax.inject.Inject;
 
 import main.domain.Account;
 import main.repo.AccountRepo;
+import main.repo.AccountRepoMap;
 import main.util.JSONUtil;
 
 public class AccountService {
@@ -17,12 +18,8 @@ public class AccountService {
 	public AccountService() {
 	}
 
-	private int count;
-
 	public String addAccount(String accountJSON) {
-		Account account = this.json.fromJSON(accountJSON, Account.class);
-		account.setAccountNumber(count++);
-		return this.json.toJSON(this.repo.getAccounts().put(count, account));
+		return this.repo.addAccount(accountJSON);
 	}
 
 	public void setJson(JSONUtil json) {
@@ -34,7 +31,7 @@ public class AccountService {
 	}
 
 	public String getAccount(int number) {
-		return this.json.toJSON(this.repo.getAccounts().get(number));
+		return this.json.toJSON(this.repo.getAccount(number));
 	}
 
 }
