@@ -11,5 +11,5 @@ public interface AccountRepo {
 	
 	public Account updateAccount(int id, Account account);
 
-	String getAllAccounts();
+	public String getAllAccounts();
 }
