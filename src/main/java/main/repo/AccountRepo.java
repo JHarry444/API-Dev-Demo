@@ -1,9 +1,9 @@
-package repo;
+package main.repo;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import domain.Account;
+import main.domain.Account;
 
 public class AccountRepo {
 
@@ -12,7 +12,6 @@ public class AccountRepo {
 	public Map<Integer, Account> getAccounts() {
 		return accounts;
 	}
-	
 	private AccountRepo() {
 		
 	}
