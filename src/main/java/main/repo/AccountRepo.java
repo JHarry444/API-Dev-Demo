@@ -1,25 +1,15 @@
 package main.repo;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import main.domain.Account;
 
-public class AccountRepo {
-
-	private Map<Integer, Account> accounts = new HashMap<>();
-
-	public Map<Integer, Account> getAccounts() {
-		return accounts;
-	}
-	private AccountRepo() {
-		
-	}
+public interface AccountRepo {
+	public String addAccount(String account);
 	
-	private static AccountRepo repo = new AccountRepo();
+	public Account getAccount(int id);
 	
-	public static AccountRepo getInstance() {
-		return repo; 
-	}
+	public String deleteAccount(int id);
+	
+	public Account updateAccount(int id, Account account);
 
+	String getAllAccounts();
 }

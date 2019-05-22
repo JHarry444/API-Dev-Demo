@@ -3,7 +3,7 @@ package main.service;
 import javax.inject.Inject;
 
 import main.domain.Account;
-import main.repo.AccountRepo;
+import main.repo.AccountRepoMap;
 import main.util.JSONUtil;
 
 public class AccountService {
@@ -12,7 +12,7 @@ public class AccountService {
 	JSONUtil json;
 
 	@Inject
-	AccountRepo repo;
+	AccountRepoMap repo;
 
 	public AccountService() {
 	}
@@ -29,7 +29,7 @@ public class AccountService {
 		this.json = json;
 	}
 
-	public void setRepo(AccountRepo repo) {
+	public void setRepo(AccountRepoMap repo) {
 		this.repo = repo;
 	}
 
