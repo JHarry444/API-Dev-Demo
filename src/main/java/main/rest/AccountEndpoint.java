@@ -7,6 +7,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 import main.service.AccountService;
 
@@ -29,7 +30,7 @@ public class AccountEndpoint {
 	
 	@Path("/getAccount/{id}")
 	@GET
-	@Produces({ "application/json" })
+	@Produces(MediaType.APPLICATION_JSON)
 	public String getAccount(@PathParam("id") Integer id) {
 		return service.getAccount(id);
 	}
