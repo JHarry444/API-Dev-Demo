@@ -26,13 +26,6 @@ public class AccountRepoDB implements AccountRepo {
 	private JSONUtil util;
 
 	@Override
-	public String getAllAccounts() {
-		TypedQuery<Account> query = manager.createQuery("Select a FROM Account a", Account.class);
-		Collection<Account> accounts = query.getResultList();
-		return util.toJSON(accounts);
-	}
-
-	@Override
 	@Transactional(REQUIRED)
 	public String addAccount(String account) {
 		Account aAccount = util.fromJSON(account, Account.class);
@@ -44,7 +37,6 @@ public class AccountRepoDB implements AccountRepo {
 	@Transactional(REQUIRED)
 	public String deleteAccount(int id) {
 		if (manager.contains(manager.find(Account.class, id))) {
-
 			manager.remove(manager.find(Account.class, id));
 		}
 		return "{\"message\": \"account sucessfully deleted\"}";
@@ -53,6 +45,13 @@ public class AccountRepoDB implements AccountRepo {
 	@Override
 	public Account getAccount(int id) {
 		return manager.find(Account.class, id);
+	}
+
+	@Override
+	public String getAllAccounts() {
+		TypedQuery<Account> query = manager.createQuery("Select a FROM Account a", Account.class);
+		Collection<Account> accounts = query.getResultList();
+		return util.toJSON(accounts);
 	}
 
 	public void setManager(EntityManager manager) {
@@ -64,8 +63,13 @@ public class AccountRepoDB implements AccountRepo {
 	}
 
 	@Override
-	public Account updateAccount(int id, Account account) {
-		// TODO Auto-generated method stub
-		return null;
+	public String updateAccount(int id, Account accountToUpdate) {
+		Account updatedAccount = accountToUpdate;
+		Account accountFromDB = getAccount(id);
+		if (accountToUpdate != null) {
+			accountFromDB = updatedAccount;
+			manager.merge(accountFromDB);
+		}
+		return "{\"message\": \"account sucessfully updated\"}";
 	}
 }
